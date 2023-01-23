@@ -18,6 +18,8 @@ type TripObjectRepository = {
     seatsAvaible: number
 };
 
+type tripRepository = Omit<TripObjectRepository, "seatsAvaible">;
+
 type SeatTicket = {
     id: number,
     seatNumber: number,
@@ -33,6 +35,7 @@ export {
     TripObjectRepository,
     Name,
     SeatTicket,
-    Seat
+    Seat,
+    tripRepository
 }
 

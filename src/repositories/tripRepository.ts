@@ -1,5 +1,5 @@
 import connection from "../database/database.js";
-import { TripObject, TripObjectRepository } from "../protocols/protocols.js";
+import { TripObject, TripObjectRepository, tripRepository } from "../protocols/protocols.js";
 
 export async function postTripRepository(trip: TripObject){
     const id: number = (await connection.query(`
@@ -71,4 +71,14 @@ export async function  getAllTripRepository() : Promise<TripObjectRepository[]>{
         GROUP BY tr.id
         `)
     return trip.rows;
+}
+
+export async function tripExistsRepository(id: number): Promise<tripRepository>{
+    const trip = await connection.query(`
+        SELECT
+            *
+        FROM trip
+        WHERE id = $1
+    `,[id])
+    return trip.rows[0];
 }
